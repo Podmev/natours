@@ -1,3 +1,3 @@
-To connect mongo shell:
+# Natours Application
 
-mongosh "mongodb+srv://natours-app.4meuvfz.mongodb.net/" --apiVersion 1 --username podmev
+Built using modern technologies: node.js, express, mongoDB, mongoose and friends
