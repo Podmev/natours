@@ -47,7 +47,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
+  // console.log(url);
   await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
@@ -61,7 +61,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   // 2) Check if user exists && password is correct
   const user = await User.findOne({ email }).select('+password');
-  console.log(user);
+  // console.log(user);
 
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
@@ -113,7 +113,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 4) Check if user changed password after the token was issued
   if (currentUser.changedPasswordAfter(decoded.iat)) {
-    console.log(decoded.iat);
+    // console.log(decoded.iat);
     return next(
       new AppError('User recently changed password! Please log in again.', 401),
     );
@@ -146,7 +146,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
       // 4) Check if user changed password after the token was issued
       if (currentUser.changedPasswordAfter(decoded.iat)) {
-        console.log(decoded.iat);
+        // console.log(decoded.iat);
         return next();
       }
 
@@ -189,7 +189,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   try {
     // 3) Send it to user's email
     const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
-    
+
     await new Email(user, resetUrl).sendPasswordReset();
   } catch (err) {
     console.log(err);

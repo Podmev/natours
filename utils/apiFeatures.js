@@ -12,7 +12,7 @@ class APIFeatures {
     // 1B) Advanced filtering
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-    console.log(JSON.parse(queryStr));
+    // console.log(JSON.parse(queryStr));
 
     // {difficulty: 'easy', duration: {$gte: 5}}
     // {difficulty: 'easy', duration: {gte: 5}}
@@ -25,7 +25,7 @@ class APIFeatures {
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' ');
-      console.log(sortBy);
+      // console.log(sortBy);
       this.query = this.query.sort(sortBy);
       //sorting by many fields: sort('price ratingsAverage')
     } else {
